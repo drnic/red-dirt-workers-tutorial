@@ -9,7 +9,7 @@ class Application < Sinatra::Application
   
   def self.fragment(fragment_name)
     obj = yield
-    Application.get "/fragment/#{fragment_name}" do
+    Application.get "/fragments/#{fragment_name}" do
       obj.request_attrs = params
       res               = obj.fetch
       instance_variable_set("@#{fragment_name}", res)

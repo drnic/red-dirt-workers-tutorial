@@ -15,7 +15,7 @@ module Cache
 end
 
 class RemoteData
-  attr_accessor :request_attrs, :query
+  attr_accessor :request_attrs
   
   def name
     self.class.to_s #.underscore
@@ -34,8 +34,17 @@ class RemoteData
   end
 
   def fetch
-    self.query = query
-    write_to_cache { self.class.search(request_attrs[:q]) }
+    QC.enqueue("#{self.class}.search_and_set", key, query)
+  end
+  
+  def self.search_and_set(key,query)
+    ttl = 10
+    result = search(query).to_json
+    Cache.set(key,result,ttl)
+  end
+
+  def query
+    request_attrs[:q]
   end
 
   def write_to_cache
@@ -44,6 +53,7 @@ class RemoteData
 
     Cache.set(key, result, ttl)
   end
+
 end
 
 class Bank < RemoteData

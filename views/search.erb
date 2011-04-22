@@ -2,13 +2,28 @@
   <input type="text"  name="q" />
 </form>
 
-<section id="bank">
+<a href="#" id="stop-polling">Stop polling</a>
+
+<style>
+  section.widget {
+    float: left;
+    width: 200px;
+    text-align: center;
+  }
+</style>
+<section id="bank" class="widget">
+  <h3>Bank prices</h3>
 </section>
 
-<section id="weather">
+<section id="weather" class="widget">
+  <h3>Weather</h3>
 </section>
 
 <script>
   fetch('bank');
   fetch('weather');
+  document.pollId = window.setInterval(function() {
+    fetch('bank');
+    fetch('weather');
+  }, 500);
 </script>

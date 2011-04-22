@@ -5,4 +5,8 @@ class Application < Sinatra::Application
     @weather_results = Weather.search(@query)
     erb :search
   end
+  
+  get "/" do
+    redirect '/search'
+  end
 end

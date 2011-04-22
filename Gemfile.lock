@@ -1,7 +1,13 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    dalli (1.0.3)
+    json (1.5.1)
     mime-types (1.16)
+    pg (0.11.0)
+    queue_classic (0.2.2)
+      json
+      pg (>= 0.10.1)
     rack (1.2.2)
     rest-client (1.6.1)
       mime-types (>= 1.16)
@@ -14,5 +20,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dalli
+  json
+  queue_classic
   rest-client
   sinatra

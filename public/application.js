@@ -3,6 +3,10 @@ function fetch(fragment_name) {
     url: "/fragments/" + fragment_name,
     data: $('#search').serialize(),
     success: function(data, status, req) {
+      if (req.status === 204) {
+        setTimeout(function() { fetch(fragment_name); }, 500);
+        return;
+      }
       $('#' + fragment_name).append(data);
     },
     error: function(request, status) {

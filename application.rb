@@ -11,9 +11,13 @@ class Application < Sinatra::Application
     obj = yield
     Application.get "/fragments/#{fragment_name}" do
       obj.request_attrs = params
-      res               = obj.fetch
-      instance_variable_set("@#{fragment_name}", res)
-      erb "_#{fragment_name}".to_sym, :layout => false
+      if obj.exists?
+        instance_variable_set "@#{fragment_name}", obj.instance
+        erb "_#{fragment_name}".to_sym, :layout => false
+      else
+        obj.fetch
+        status 204
+      end
     end
   end
   

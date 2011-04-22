@@ -34,7 +34,7 @@ class RemoteData
   end
 
   def fetch
-    QC.enqueue("#{self.class}.search_and_set", key, query)
+    QC.enqueue("::#{self.class}.search_and_set", key, query)
   end
   
   def self.search_and_set(key,query)

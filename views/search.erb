@@ -1,15 +1,14 @@
 <form action="/search" id="search">
-  <input type="text"  name="query" />
+  <input type="text"  name="q" />
 </form>
 
 <section id="bank">
-<% @bank_results.each do |result| %>
-  <p><%= result %></p>
-<% end %>
 </section>
 
 <section id="weather">
-<% @weather_results.each do |result| %>
-  <p><%= result %></p>
-<% end %>
 </section>
+
+<script>
+  fetch('bank');
+  fetch('weather');
+</script>
